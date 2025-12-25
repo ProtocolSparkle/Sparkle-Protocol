@@ -10,9 +10,11 @@
 
 <p align="center">
   <a href="#mainnet-proof"><img src="https://img.shields.io/badge/Status-Mainnet%20Validated-brightgreen?style=flat-square" alt="Status"></a>
+  <a href="https://github.com/ProtocolSparkle/Sparkle-Protocol/actions"><img src="https://img.shields.io/github/actions/workflow/status/ProtocolSparkle/Sparkle-Protocol/ci.yml?style=flat-square&label=CI" alt="CI"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License"></a>
   <a href="https://www.npmjs.com/package/@sparkleprotocol/core"><img src="https://img.shields.io/npm/v/@sparkleprotocol/core?style=flat-square" alt="npm"></a>
   <img src="https://img.shields.io/badge/TypeScript-5.0+-3178C6?style=flat-square&logo=typescript&logoColor=white" alt="TypeScript">
+  <img src="https://img.shields.io/badge/Bitcoin-Taproot-F7931A?style=flat-square&logo=bitcoin&logoColor=white" alt="Bitcoin">
 </p>
 
 <p align="center">
@@ -93,17 +95,34 @@ See [proofs/](proofs/) for full verification details.
 ## How It Works
 
 ```
-1. Seller creates Lightning hold invoice
-2. Seller locks inscription in Taproot address with:
-   - Claim path: requires preimage (revealed when buyer pays)
-   - Refund path: available after timelock (if buyer abandons)
-3. Buyer pays Lightning invoice
-4. Payment reveals preimage
-5. Buyer uses preimage to claim inscription
-6. Seller receives Lightning payment
-
-Result: Atomic exchange - both succeed or neither does
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           SPARKLE PROTOCOL FLOW                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│   SELLER                         HTLC                           BUYER      │
+│   ┌─────┐                    ┌─────────┐                       ┌─────┐     │
+│   │     │ ── 1. Lock ──────> │ Taproot │                       │     │     │
+│   │ 🖼️  │    Inscription     │ Address │                       │ ⚡  │     │
+│   │     │                    │         │ <── 2. Pay Lightning ─│     │     │
+│   │     │                    │  ┌───┐  │     (reveals preimage)│     │     │
+│   │     │                    │  │ 🔐│  │                       │     │     │
+│   │     │ <── 4. Receive ─── │  └───┘  │ ── 3. Claim ────────> │     │     │
+│   │     │    Lightning       │         │    with preimage      │ 🖼️  │     │
+│   └─────┘                    └─────────┘                       └─────┘     │
+│                                                                             │
+│   ════════════════════════════════════════════════════════════════════     │
+│   RESULT: Atomic exchange - both succeed or neither does                   │
+│   TIMEOUT: Seller reclaims inscription if buyer abandons                   │
+└─────────────────────────────────────────────────────────────────────────────┘
 ```
+
+### Flow Steps
+
+1. **Seller locks inscription** in Taproot address with two spending paths
+2. **Buyer pays Lightning invoice** - payment held until preimage revealed
+3. **Seller claims payment** - reveals preimage on Lightning Network
+4. **Buyer claims inscription** - uses revealed preimage on-chain
+5. **Atomic settlement** - both parties receive assets or trade times out
 
 ### Security Properties
 
@@ -162,8 +181,23 @@ MIT License - see [LICENSE](LICENSE)
 
 ---
 
+## Community
+
+- **Website:** https://sparkleprotocol.com
+- **Twitter/X:** [@SparkleProtocol](https://twitter.com/SparkleProtocol)
+- **Discord:** Coming soon
+
+---
+
+## Contributing
+
+We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+---
+
 ## Links
 
 - **Website:** https://sparkleprotocol.com
 - **NPM:** https://www.npmjs.com/package/@sparkleprotocol/core
 - **Specification:** [docs/SPECIFICATION.md](docs/SPECIFICATION.md)
+- **GitHub:** https://github.com/ProtocolSparkle/Sparkle-Protocol
