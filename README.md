@@ -34,6 +34,17 @@ Sparkle Protocol enables **trustless atomic swaps for Bitcoin Ordinals** using L
 
 ---
 
+## Features
+
+- **Trustless** - No intermediaries, no custody risk, no counterparty trust required
+- **Atomic** - Both parties receive assets simultaneously or trade cancels
+- **Non-custodial** - Private keys never leave your wallet
+- **Lightning Fast** - Instant settlement via Lightning Network
+- **Recoverable** - Seller can always reclaim via timelock if buyer abandons
+- **Mainnet Proven** - Validated on Bitcoin mainnet with real transactions
+
+---
+
 ## Quick Start
 
 ### Installation
@@ -181,23 +192,13 @@ MIT License - see [LICENSE](LICENSE)
 
 ---
 
-## Community
+## Links & Community
 
-- **Website:** https://sparkleprotocol.com
-- **Twitter/X:** [@SparkleProtocol](https://twitter.com/SparkleProtocol)
-- **Discord:** Coming soon
-
----
-
-## Contributing
-
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
-
-## Links
-
-- **Website:** https://sparkleprotocol.com
-- **NPM:** https://www.npmjs.com/package/@sparkleprotocol/core
-- **Specification:** [docs/SPECIFICATION.md](docs/SPECIFICATION.md)
-- **GitHub:** https://github.com/ProtocolSparkle/Sparkle-Protocol
+| Resource | Link |
+|----------|------|
+| Website | https://sparkleprotocol.com |
+| NPM Package | [@sparkleprotocol/core](https://www.npmjs.com/package/@sparkleprotocol/core) |
+| Specification | [docs/SPECIFICATION.md](docs/SPECIFICATION.md) |
+| Twitter/X | [@SparkleProtocol](https://twitter.com/SparkleProtocol) |
+| Contributing | [CONTRIBUTING.md](CONTRIBUTING.md) |
+| Security | [SECURITY.md](SECURITY.md) |
