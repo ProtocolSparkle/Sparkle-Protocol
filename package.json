@@ -1,28 +1,29 @@
 {
   "name": "@sparkleprotocol/core",
-  "version": "1.0.0",
-  "description": "Trustless atomic swaps for Bitcoin Ordinals via Lightning Network - Mainnet Validated",
+  "version": "1.0.2-dev.0",
+  "description": "Bitcoin Ordinals swap primitives and Lightning integration interfaces; public mainnet evidence, unaudited",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
     },
     "./core": {
-      "import": "./dist/core/index.js",
-      "types": "./dist/core/index.d.ts"
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.js"
     },
     "./adapters": {
-      "import": "./dist/adapters/index.js",
-      "types": "./dist/adapters/index.d.ts"
+      "types": "./dist/adapters/index.d.ts",
+      "import": "./dist/adapters/index.js"
     }
   },
   "files": [
     "dist",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "CHANGELOG.md"
   ],
   "bin": {
     "sparkle": "./dist/cli/sparkle-cli.js"
@@ -33,11 +34,16 @@
     "build:all": "tsc && node scripts/build-browser.mjs",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build",
-    "test": "vitest",
-    "test:swap": "npx tsx tests/swap.test.ts",
-    "test:e2e": "npx tsx tests/end-to-end-swap.ts",
-    "test:verify": "npx tsx tests/verify-deep.ts",
-    "cli": "npx tsx src/cli/sparkle-cli.ts"
+    "test": "vitest run",
+    "test:swap": "vitest run tests/swap.test.ts tests/core-regressions.test.ts",
+    "test:e2e": "vitest run tests/swap-execution.test.ts",
+    "test:verify": "vitest run tests/core-regressions.test.ts",
+    "cli": "tsx src/cli/sparkle-cli.ts",
+    "test:watch": "vitest",
+    "example": "tsx examples/basic-swap.ts",
+    "verify:proofs": "node scripts/verify-proof-artifacts.mjs",
+    "check:package": "node scripts/check-package.mjs",
+    "check": "npm run build:all && npm test && npm run example && npm run verify:proofs && npm run check:package"
   },
   "keywords": [
     "bitcoin",
@@ -59,11 +65,11 @@
     "@scure/btc-signer": "^1.3.0"
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
-    "esbuild": "^0.27.1",
-    "tsx": "^4.7.0",
+    "@types/node": "^22.20.1",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.23.13",
     "typescript": "^5.3.0",
-    "vitest": "^1.1.0"
+    "vitest": "^4.1.11"
   },
   "author": "David A. Michael",
   "license": "MIT",
@@ -76,7 +82,7 @@
   },
   "homepage": "https://sparkleprotocol.com",
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=22.12.0"
   },
   "publishConfig": {
     "access": "public"

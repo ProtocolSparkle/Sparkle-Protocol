@@ -36,3 +36,5 @@ Thumbs.db
 *.log
 *.tmp
 node_modules/
+
+!CHANGELOG.md

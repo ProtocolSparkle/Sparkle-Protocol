@@ -1,84 +1,34 @@
-# Contributing to Sparkle Protocol
+# Contributing
 
-Thank you for your interest in contributing to Sparkle Protocol! This document provides guidelines for contributing.
+Use issues for reproducible bugs and proposed changes. Include the commit or package version, operating system, Node version, expected behavior, and reproduction steps. Report exploitable vulnerabilities privately through [SECURITY.md](SECURITY.md).
 
-## Code of Conduct
+## Development
 
-By participating in this project, you agree to maintain a respectful and inclusive environment for everyone.
+Use Node.js 22.12 or newer. CI checks Node 22 and 24 on Linux and Node 22 on Windows.
 
-## How to Contribute
-
-### Reporting Bugs
-
-1. Check if the issue already exists in [GitHub Issues](https://github.com/ProtocolSparkle/Sparkle-Protocol/issues)
-2. If not, create a new issue with:
-   - Clear, descriptive title
-   - Steps to reproduce
-   - Expected vs actual behavior
-   - Environment details (OS, Node.js version, etc.)
-
-### Suggesting Features
-
-1. Open a [GitHub Issue](https://github.com/ProtocolSparkle/Sparkle-Protocol/issues) with the `enhancement` label
-2. Describe the feature and its use case
-3. Explain why it would benefit the protocol
-
-### Pull Requests
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature`
-3. Make your changes following our coding standards
-4. Write/update tests as needed
-5. Ensure all tests pass: `npm test`
-6. Commit with clear messages: `git commit -m "feat: add new feature"`
-7. Push to your fork: `git push origin feature/your-feature`
-8. Open a Pull Request
-
-### Commit Message Format
-
-We follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-feat: add new feature
-fix: resolve bug in swap logic
-docs: update README
-test: add unit tests for core module
-refactor: improve code structure
-```
-
-## Development Setup
-
-```bash
-# Clone the repo
+```sh
 git clone https://github.com/ProtocolSparkle/Sparkle-Protocol.git
 cd Sparkle-Protocol
-
-# Install dependencies
-npm install
-
-# Run tests
-npm test
-
-# Build
-npm run build
+npm ci --ignore-scripts
+npm run check
+npm audit --audit-level=low
 ```
 
-## Coding Standards
+Commit `package-lock.json` whenever dependencies change. Use `npm run test:watch` for interactive development. The automated suite is offline; it never pays invoices or broadcasts transactions. The manual test guides under `tests/` are historical integration procedures and are not executed by CI.
 
-- **TypeScript**: All code must be TypeScript with strict mode
-- **Formatting**: Use consistent formatting (consider Prettier)
-- **Documentation**: Document public APIs with JSDoc comments
-- **Testing**: Write tests for new functionality
-- **Security**: Follow security best practices for cryptographic code
+## Pull requests
 
-## Security Vulnerabilities
+1. Create a branch for a coherent change.
+2. Keep TypeScript strict and document public API behavior.
+3. Add meaningful regression coverage when changing protocol or transaction behavior.
+4. Run the checks above and describe their results and any limitations.
+5. Review the diff for accidental credentials, keys, wallet data, and unrelated changes.
+6. Open a pull request explaining the problem and resulting behavior.
 
-For security issues, please see [SECURITY.md](SECURITY.md) for responsible disclosure guidelines.
+Preserve published proof files byte for byte. Add a new dated record when evidence changes; do not rewrite a prior completion snapshot. Keep proof claims separate from automated test results and audit claims.
 
-## Questions?
+## Releases
 
-Open a [Discussion](https://github.com/ProtocolSparkle/Sparkle-Protocol/discussions) or reach out to the maintainers.
+The current development version is `1.0.2-dev.0`. The npm 1.0.1 release and its registry artifact remain unchanged. Before a future release, choose the version, update the package and public SDK version together, build and inspect the package, document compatibility changes, and obtain the required release review. Publishing the repository does not publish to npm or deploy the website.
 
----
-
-Thank you for contributing to trustless Bitcoin trading!
+Maintain respectful, constructive communication in issues and reviews. Code and documentation contributions follow the repository's MIT license.

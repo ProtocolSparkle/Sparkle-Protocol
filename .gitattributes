@@ -1,0 +1,5 @@
+* text=auto eol=lf
+*.png binary
+*.zip binary
+# Preserve the original published evidence byte for byte.
+proofs/mainnet/2026-09-06/** -text whitespace=cr-at-eol

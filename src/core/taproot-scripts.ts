@@ -204,7 +204,7 @@ export function createSparkleSwapAddress(
 
   // Use an unspendable internal pubkey (NUMS point)
   // This is standard practice when only script paths should be used
-  // H = lift_x(SHA256("TaprootNothing"))
+  // Fixed NUMS point described in BIP-341.
   const UNSPENDABLE_PUBKEY = hexToBytes(
     '50929b74c1a04954b78b4b6035e97a5e078a5a0f28ec96d547bfee9ace803ac0'
   );

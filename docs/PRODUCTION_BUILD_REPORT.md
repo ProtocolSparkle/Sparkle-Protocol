@@ -1,3 +1,5 @@
+> Historical record. The status labels and recommendations below describe an earlier design or website revision. For this checkout, use [current implementation notes](SPECIFICATION.md) and [readiness](READINESS.md). This document is not an independent audit or current production approval.
+
 # Sparkle Protocol - Production Build Report v1.0.0-rc.1
 
 **Generated:** December 10, 2025

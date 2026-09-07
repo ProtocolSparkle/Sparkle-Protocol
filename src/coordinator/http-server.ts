@@ -72,7 +72,7 @@ function checkRateLimit(ip: string): boolean {
 }
 
 // Clean up old rate limit entries periodically
-setInterval(() => {
+const rateLimitCleanup = setInterval(() => {
   const now = Date.now();
   for (const [ip, entry] of rateLimits.entries()) {
     if (entry.resetAt < now) {
@@ -80,6 +80,8 @@ setInterval(() => {
     }
   }
 }, RATE_LIMIT_WINDOW_MS);
+// Importing the SDK must not keep an otherwise idle Node process alive.
+rateLimitCleanup.unref();
 
 // HTTP utilities
 function sendJson<T>(res: ServerResponse, statusCode: number, data: ApiResponse<T>): void {

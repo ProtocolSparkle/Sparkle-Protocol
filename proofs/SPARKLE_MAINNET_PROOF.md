@@ -1,3 +1,5 @@
+> Historical evidence report. See the [current proof index](README.md) for the September 2026 inscription script-path claim and the [readiness assessment](../docs/READINESS.md) for scope and remaining work. Original production-readiness claims below are not a current release approval.
+
 # SPARKLE Protocol v0.3.8 - Mainnet Validation Report
 
 **Date:** December 13, 2025

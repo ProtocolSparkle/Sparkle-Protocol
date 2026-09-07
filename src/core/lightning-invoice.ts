@@ -94,12 +94,12 @@ export function decodeBolt11(invoice: string): Bolt11Invoice {
 
   // Determine network from prefix
   let network: 'mainnet' | 'testnet' | 'regtest';
-  if (lowerInvoice.startsWith('lnbc')) {
+  if (lowerInvoice.startsWith('lnbcrt')) {
+    network = 'regtest';
+  } else if (lowerInvoice.startsWith('lnbc')) {
     network = 'mainnet';
   } else if (lowerInvoice.startsWith('lntb')) {
     network = 'testnet';
-  } else if (lowerInvoice.startsWith('lnbcrt')) {
-    network = 'regtest';
   } else {
     throw new Error('Invalid BOLT11 invoice prefix');
   }
@@ -113,7 +113,6 @@ export function decodeBolt11(invoice: string): Bolt11Invoice {
   }
 
   const hrp = decoded.prefix;
-  const data = bech32.fromWords(decoded.words);
 
   // Parse amount from HRP if present
   let amountMsat: bigint | undefined;
@@ -130,33 +129,11 @@ export function decodeBolt11(invoice: string): Bolt11Invoice {
     }
   }
 
-  // The first 52 bytes of data after timestamp is the payment hash
-  // Timestamp is 7 bytes (35 bits / 5), then payment hash follows in tagged fields
-  // For simplicity, we search for the payment hash tag (type 1)
-
-  // Convert 5-bit words to bytes for parsing
-  const dataBytes = new Uint8Array(data);
-
-  // Skip timestamp (first 7 5-bit characters = 35 bits)
-  // Then parse tagged fields
+  // BOLT11 is a stream of 5-bit words. Converting the entire payload to
+  // bytes rejects valid invoices with non-byte-aligned timestamp/tag data.
+  // Decode only the payment-hash field (the npm 1.0.1 correction).
   let paymentHash: Uint8Array | undefined;
 
-  // Simplified parsing: payment hash is typically the first 32 bytes after timestamp
-  // In BOLT11, tagged fields start after 7 5-bit timestamp chars
-  // For a robust implementation, we'd parse all tagged fields
-
-  // The payment hash is always present and is 52 5-bit chars (260 bits = 32.5 bytes, padded to 33)
-  // Actually, payment_hash tag is: type(5 bits) + length(10 bits) + data(256 bits = 52 5-bit chars)
-
-  // For now, use a simplified approach: scan for 32 bytes that look like a hash
-  // The payment hash appears early in the data after the timestamp
-
-  // More reliable: extract from known position
-  // After HRP and amount parsing, data contains:
-  // - 7 chars timestamp
-  // - Tagged fields (type: 5 bits, len: 10 bits, data: len*5 bits)
-
-  // Parse tagged fields
   let pos = 7; // Skip timestamp (7 5-bit chars)
   const words = decoded.words;
 

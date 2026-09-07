@@ -4,7 +4,6 @@
 
 # Dependencies
 node_modules/
-package-lock.json
 yarn.lock
 pnpm-lock.yaml
 
@@ -94,3 +93,6 @@ lnd.conf
 ftp-deploy.json
 deploy-config.*
 .npmrc
+.vitest/
+*.tgz
+data/

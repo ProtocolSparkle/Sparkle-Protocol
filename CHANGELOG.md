@@ -1,6 +1,28 @@
 # Changelog
 
-All notable changes to Sparkle Protocol will be documented in this file.
+## 1.0.2-dev.0 (unreleased) — 2026-09-07
+
+- Synchronize the three npm 1.0.1 corrections into the TypeScript source, with regression tests.
+- Stop the coordinator housekeeping timer from keeping an idle SDK consumer alive.
+- Fix ESM imports in the claim/refund hex wrappers and regtest invoice prefix detection.
+- Replace the broken quick start with an executable offline testnet example.
+- Replace false-success verification scripts with assertion-based test entry points; verify claim and refund Schnorr signatures and reject tampering.
+- Commit the npm lockfile, update development tools, and check supported Node 22/24 builds, package exports, proof integrity, and dependency advisories in CI.
+- Add the original September 6 mainnet inscription proof bundle without modifying its bytes.
+- Clarify evidence scope, incomplete SDK paths, and historical production claims. Align package and public SDK development version labels.
+- Development now requires Node.js 22.12 or newer. This is a repository development snapshot; no new npm package is published by this update.
+
+## 1.0.1 — 2026-09-02 (published npm artifact)
+
+- Remove an unused whole-payload byte conversion that caused real BOLT11 invoices to fail with a padding error.
+- Reject buyer and seller private keys that differ from the keys in the supplied swap parameters.
+- Correct package naming, logo links, and the npm package's description.
+
+The source ports in this checkout were checked against the published [npm 1.0.1 artifact](https://www.npmjs.com/package/@sparkleprotocol/core/v/1.0.1). The original release was maintained as compiled output; this repository now carries the corresponding TypeScript fixes. These fixes do not change contract address or script construction.
+
+## Historical entries
+
+The original entries below are preserved as release history. Their broad production or atomic-swap claims are superseded by the current [evidence scope](proofs/README.md) and [readiness assessment](docs/READINESS.md).
 
 ## [1.0.0] - 2025-12-14
 

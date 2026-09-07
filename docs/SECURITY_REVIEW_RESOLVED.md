@@ -1,3 +1,5 @@
+> Historical record. The status labels and recommendations below describe an earlier design or website revision. For this checkout, use [current implementation notes](SPECIFICATION.md) and [readiness](READINESS.md). This document is not an independent audit or current production approval.
+
 # Sparkle Protocol Hostinger Deploy - Security & Functionality Review
 **Scope:** `hostinger-deploy/` (swap UI + static docs)
 **Version refs:** `sparkle-swap.js` v0.3.1, `swap.html`

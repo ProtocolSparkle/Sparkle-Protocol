@@ -9,10 +9,12 @@
  */
 
 import * as btc from '@scure/btc-signer';
-import { hexToBytes, bytesToHex } from '@noble/hashes/utils';
+import { schnorr } from '@noble/curves/secp256k1';
+import { bytesToHex } from '@noble/hashes/utils';
 import {
   SparkleSwapAddress,
   NETWORKS,
+  createSparkleSwapAddress,
   NetworkType,
   verifyPreimage,
   toHex,
@@ -95,6 +97,14 @@ export function buildClaimTransaction(
   // Validate private key length
   if (params.buyerPrivkey.length !== 32) {
     throw new Error('Buyer private key must be 32 bytes');
+  }
+
+  // Ported from npm 1.0.1: reject a key that cannot spend the committed leaf.
+  const committed = params.swapAddress.params.buyerPubkey;
+  const committedX = committed.length === 33 ? committed.slice(1) : committed;
+  const derivedX = schnorr.getPublicKey(params.buyerPrivkey);
+  if (bytesToHex(derivedX) !== bytesToHex(committedX)) {
+    throw new Error('buyerPrivkey does not correspond to the buyer pubkey committed in the swap address');
   }
 
   // Verify preimage matches payment hash (fail early with clear error)
@@ -198,9 +208,6 @@ export function buildClaimTransactionFromHex(params: {
   refundLocktime: number;
   network?: NetworkType;
 }): ClaimTransactionResult {
-  // Import here to avoid circular dependency
-  const { createSparkleSwapAddress } = require('./taproot-scripts.js');
-
   // Recreate the swap address
   const swapAddress = createSparkleSwapAddress({
     paymentHash: fromHex(params.paymentHashHex),

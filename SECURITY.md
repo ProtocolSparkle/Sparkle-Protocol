@@ -1,38 +1,21 @@
-# Security Policy
+# Security policy
 
-## Reporting a Vulnerability
+## Report a vulnerability privately
 
-If you discover a security vulnerability in Sparkle Protocol, please report it responsibly:
+Email **security@sparkleprotocol.com** with the affected commit or package version, reproduction steps, impact, and relevant logs with secrets removed. Do not publish an exploitable vulnerability in a public issue. Coordinate disclosure with the maintainers so a fix can be prepared.
 
-1. **Do not** open a public GitHub issue
-2. Email details to: security@sparkleprotocol.com
-3. Include steps to reproduce the vulnerability
-4. Allow reasonable time for a fix before disclosure
+This policy covers the protocol design, SDK implementation, transaction construction, and integration vulnerabilities. Do not include private keys, seed phrases, node credentials, or unspent payment preimages in a report.
 
-## Scope
+## Current assurance level
 
-This policy covers:
-- Protocol specification vulnerabilities
-- SDK implementation bugs
-- Cryptographic weaknesses
+The SDK is unaudited and includes incomplete integration paths. Passing tests, a clean dependency audit, and a confirmed mainnet proof cover different properties; none is a general security certification. Read [readiness](docs/READINESS.md) and [implementation notes](docs/SPECIFICATION.md) before using funds.
 
-## Security Considerations
+## Integration responsibilities
 
-### Timelock Selection
-- Choose appropriate timelocks based on transaction value
-- Minimum recommended: 6 blocks for low-value swaps
-- High-value swaps: 24+ blocks
+- Verify actual funding outputs, unspent status, confirmations, the complete reconstructed Taproot contract, and inscription satpoints before paying or signing.
+- Use a fully validating Lightning implementation for invoices and HTLC state. A payment-hash match is insufficient on its own.
+- Review Bitcoin timelocks alongside Lightning expiry/HTLC deadlines, monitoring, fee escalation, and recovery. Historical short-window recommendations are superseded by the current implementation notes.
+- Keep preimages unique and secret until the selected protocol flow requires disclosure. Never log production secrets.
+- Keep private keys under appropriate signing controls. The low-level builders explicitly accept private keys; integrations must review how those keys are obtained and handled.
 
-### Preimage Handling
-- Never reuse preimages across swaps
-- Generate preimages with cryptographically secure random number generators
-- Clear preimage data from memory after use
-
-### Key Management
-- Never expose private keys in transactions or logs
-- Use hardware wallets for high-value operations
-- Verify all addresses before broadcasting transactions
-
-## Acknowledgments
-
-We appreciate responsible disclosure and will acknowledge security researchers who help improve the protocol.
+The deterministic keys in automated tests and examples are public fixtures and must never receive funds.

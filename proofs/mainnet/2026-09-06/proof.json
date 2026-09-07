@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "status": "BITCOIN_MAINNET_LOCK_CLAIM_PROOF_COMPLETE",
+  "network": "mainnet",
+  "inscription_id": "5ec25d2eb7416f530aea00614ba8744c4ff7f5a35bf90e2094123d7d43eb16a1i0",
+  "completed_utc": "2026-09-06T16:39:56.956Z",
+  "lock": {
+    "txid": "efe16e4cb60d0395f283b898f7e08a2597b4ca97bec80b482189fbd51865a493",
+    "vout": 0,
+    "value_sats": 10000,
+    "block_height": 965799,
+    "block_hash": "0000000000000000000062f9f79c9262c2c780e62922231d634a6d3ad31d833f",
+    "confirmations": 5,
+    "fee_sats": 212,
+    "vsize": 212
+  },
+  "claim": {
+    "txid": "43bee33807fc453b360a8f0a3e0653b70cc97e177bbe07221fc60806ddd3d7b5",
+    "vout": 0,
+    "value_sats": 9840,
+    "block_height": 965803,
+    "block_hash": "0000000000000000000093a31c3a5d33557329a0074f34518b7d52ecc1d51976",
+    "confirmations": 1,
+    "fee_sats": 160,
+    "vsize": 154,
+    "address": "bc1phuz6u3c4njfy4pvjhf322tkw5u7jxnlv0fm73c3ln8vvta6dcjyqyqu5ju",
+    "script_pubkey": "5120bf05ae47159c924a8592ba62a52ecea73d234fec7a77e8e23f99d8c5f74dc488"
+  },
+  "checks": {
+    "exact_saved_lock_hex": true,
+    "exact_saved_claim_hex": true,
+    "claim_four_item_witness": true,
+    "preimage_hash_matches_hashlock": true,
+    "active_chain_confirmations": true,
+    "inscription_at_claim_output0_offset0": true,
+    "explicit_no_runes": true
+  }
+}

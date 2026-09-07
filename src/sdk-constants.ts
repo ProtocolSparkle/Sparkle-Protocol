@@ -15,7 +15,7 @@
 /**
  * NUMS (Nothing Up My Sleeve) Internal Key
  *
- * Standard: lift_x(SHA256("TaprootNothing"))
+ * Fixed NUMS point described in BIP-341.
  * Used to create unspendable key path, forcing script path execution.
  */
 export const NUMS_INTERNAL_KEY =

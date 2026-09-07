@@ -3,15 +3,10 @@
  *
  * Trustless atomic swaps for Bitcoin Ordinals via Lightning Network.
  *
- * v1.2.1 - PRODUCTION READINESS UPDATE (Audit Response):
- * - Inverted preimage flow (buyer-generated) - fixes seller theft vulnerability
- * - 72-block safety buffer (was 12) - fixes time-bandit attack
- * - Dust padding support (Gate 2 >= instead of ==) - fixes sub-dust ordinals
- * - Settlement Watcher service for seller-side automation
- * - FeeEstimator and HoldInvoice provider interfaces
+ * Development snapshot. See docs/READINESS.md for implementation limits.
  *
  * @module sparkle-protocol
- * @version 1.2.0
+ * @version 1.0.2-dev.0
  */
 
 // =============================================================================
@@ -373,7 +368,7 @@ export class SparkleSDK {
    * Get SDK version
    */
   static get version(): string {
-    return '1.2.0';
+    return VERSION;
   }
 
   /**
@@ -430,4 +425,4 @@ export * as legacyBrowser from './browser/index.js';
 // VERSION
 // =============================================================================
 
-export const VERSION = '1.2.1';
+export const VERSION = '1.0.2-dev.0';
