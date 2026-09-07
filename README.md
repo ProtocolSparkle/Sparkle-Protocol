@@ -60,7 +60,7 @@ The check builds TypeScript and browser bundles, runs offline assertion tests, e
 
 The transaction primitives are exported from `@sparkleprotocol/core/core`. This example uses the checked-out package after `npm run build`; the complete runnable file is [examples/basic-swap.ts](examples/basic-swap.ts).
 
-``ts
+```ts
 import {
   createSparkleSwapAddress,
   generatePreimage,
